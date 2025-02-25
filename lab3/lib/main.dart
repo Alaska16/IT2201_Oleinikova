@@ -53,7 +53,7 @@ class _IncrementHomePageState extends State<IncrementHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Инкремент'),
+        title: Text('Счётчик'),
         backgroundColor: Colors.blue,
         leading: TextButton(
           onPressed: () {},
@@ -65,7 +65,7 @@ class _IncrementHomePageState extends State<IncrementHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Значение инкремента',
+              'Значение счётчика',
               style: TextStyle(fontSize: 20, color: Colors.black),
             ),
             Text(
