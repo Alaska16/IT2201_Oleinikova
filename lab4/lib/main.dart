@@ -31,11 +31,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 27;
+  int like_counter = 27;
 
   void _incrementCounterLike() {
     setState(() {
-      _counter++;
+      like_counter++;
     });
   }
 
@@ -56,7 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Column(
             children: [
-              // Замените URL ниже на ваш URL изображения
               Image.network('https://avatars.mds.yandex.net/i?id=15d3e3dc0b0bba0c378ffa3483537eb0da048bfe-10158740-images-thumbs&n=13'),
               SizedBox(
                 height: 20,
@@ -88,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.red,
                     ),
                   ),
-                  Text('$_counter'),
+                  Text('$like_counter'),
                 ],
               ),
               Container(
