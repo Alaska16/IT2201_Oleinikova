@@ -17,9 +17,11 @@ class MyApp extends StatelessWidget {
           title: const Text('Список элементов'),
           backgroundColor: Colors.green,
         ),
+
         body: ListView.builder(
             itemBuilder: (context, index) {
-              return Text('2^$index');
+              final result = pow(2, index);
+              return Text('2 ^ $index = $result');
             }
         ),
       ),
