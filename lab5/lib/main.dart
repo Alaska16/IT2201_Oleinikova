@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Список элементов'),
+          backgroundColor: Colors.green,
         ),
         body: ListView(
           children: const [
