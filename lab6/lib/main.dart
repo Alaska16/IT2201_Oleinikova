@@ -61,6 +61,26 @@ class MyFormState extends State<MyForm> {
                     } else {
                       int? width = int.tryParse(_widthController.text);
                       int? height = int.tryParse(_heightController.text);
+
+                      if (width != null && height != null && width > 0 && height > 0) {
+                        int area = width * height;
+                        setState(() {
+                          _result = 'S = $width * $height = $area мм^2';
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Вычисление успешно выполнено'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Ширина и высота должны быть положительными числами'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     }
                   }
                 },
