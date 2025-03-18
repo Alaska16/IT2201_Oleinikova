@@ -17,35 +17,49 @@ class MyFormState extends State<MyForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(20.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
-              const Text(
-                'Ширина (мм):',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              TextFormField(
-                controller: _widthController,
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value!.isEmpty) return 'Задайте Ширину';
-                  return null;
-                },
+              Row(
+                children: <Widget>[
+                  const Text(
+                    'Ширина (мм):',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  const SizedBox(width: 10.0),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _widthController,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) return 'Задайте Ширину';
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20.0),
-              const Text(
-                'Высота (мм):',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              TextFormField(
-                controller: _heightController,
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value!.isEmpty) return 'Задайте Высоту';
-                  return null;
-                },
+              Row(
+                children: <Widget>[
+                  const Text(
+                    'Высота (мм):',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  const SizedBox(width: 10.0),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _heightController,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) return 'Задайте Высоту';
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20.0),
               ElevatedButton(
