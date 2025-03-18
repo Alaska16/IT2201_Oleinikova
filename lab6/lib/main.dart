@@ -12,6 +12,7 @@ class MyFormState extends State<MyForm> {
   final TextEditingController _widthController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   String? _result = '';
+  bool _isCalculated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +81,7 @@ class MyFormState extends State<MyForm> {
                         int area = width * height;
                         setState(() {
                           _result = 'S = $width * $height = $area мм^2';
+                          _isCalculated = true;
                         });
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -99,7 +101,7 @@ class MyFormState extends State<MyForm> {
                   }
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                  backgroundColor: WidgetStateProperty.all<Color>(Colors.blue),
                 ),
                 child: const Text(
                   'Вычислить',
@@ -107,9 +109,15 @@ class MyFormState extends State<MyForm> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              Text(
-                _result ?? '',
-                style: const TextStyle(fontSize: 24.0),
+              if (!_isCalculated)
+                const Text(
+                  'Задайте параметры',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+              if (_isCalculated)
+                Text(
+                  _result ?? '',
+                  style: const TextStyle(fontSize: 24.0),
               ),
             ],
           ),
@@ -123,7 +131,10 @@ void main() => runApp(
   MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Scaffold(
-      appBar: AppBar(title: const Text('Калькулятор площади')),
+      appBar: AppBar(
+          title: const Text('Калькулятор площади'),
+          backgroundColor: Colors.blue,
+      ),
       body: MyForm(),
     ),
   ),
