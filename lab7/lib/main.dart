@@ -6,6 +6,15 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Возвращение значения')),
+      body: Center(child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => const SecondScreen(),
+          ));
+        },
+        child: const Text('Приступить к выбору'),
+      )),
     );
   }
 }
