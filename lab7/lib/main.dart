@@ -28,6 +28,26 @@ class SecondScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Выберите любой вариант')),
       body: Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Да!')),
+              );
+            },
+            child: const Text('Да!'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Нет.')),
+              );
+            },
+            child: const Text('Нет.'),
+          ),
+        ],
       )),
     );
   }
