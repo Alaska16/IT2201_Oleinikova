@@ -44,5 +44,23 @@ class Photo {
 }
 
 class PhotoList extends StatelessWidget {
+  final List<Photo> photos;
 
+  PhotoList({required this.photos});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemCount: photos.length,
+      itemBuilder: (context, index) {
+        return Card(
+          margin: EdgeInsets.all(8),
+          child: Image.network(photos[index].thumbUrl, fit: BoxFit.cover),
+        );
+      },
+    );
+  }
 }
