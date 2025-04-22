@@ -80,7 +80,74 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    return Scaffold(
+      backgroundColor: Colors.green[50],
+      appBar: AppBar(
+        title: Text(
+          'Лента новостей',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      ),
+      body: FutureBuilder<List<News>>(
+        future: futureNews,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Ошибка: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('Новости не найдены'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                News news = snapshot.data![index];
+                return Card(
+                  margin: EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (news.previewPictureSrc.isNotEmpty)
+                        CachedNetworkImage(
+                          imageUrl: news.previewPictureSrc,
+                          placeholder:
+                              (context, url) => CircularProgressIndicator(),
+                          errorWidget:
+                              (context, url, error) => Icon(Icons.error),
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: 200,
+                        ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              Bidi.stripHtmlIfNeeded(news.title),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              '${news.date}\n${Bidi.stripHtmlIfNeeded(news.previewText)}',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 }
 
