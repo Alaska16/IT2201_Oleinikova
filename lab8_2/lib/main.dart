@@ -53,7 +53,29 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   Future<List<News>> fetchNews(http.Client client) async {
+    try {
+      final response = await client.get(
+        Uri.parse(
+          'https://newsapi.org/v2/everything?q=corgi&from=2025-04-20&sortBy=publishedAt&apiKey=621bd55da67c49ba8788a7048d53d8d4',
+        ),
+      );
 
+      if (response.statusCode == 200) {
+        print('Ответ сервера: ${response.body}');
+
+        final Map<String, dynamic> body = jsonDecode(response.body);
+
+        List<News> news = (body['articles'] as List)
+            .map((dynamic item) => News.fromJson(item))
+            .toList();
+        return news;
+      } else {
+        throw Exception('Ошибка загрузки: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Ошибка: $e');
+      throw Exception('Не удалось загрузить новости: $e');
+    }
   }
 
   @override
@@ -63,4 +85,5 @@ class _NewsScreenState extends State<NewsScreen> {
 }
 
 class News {
+
 }
