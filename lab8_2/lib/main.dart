@@ -152,5 +152,33 @@ class _NewsScreenState extends State<NewsScreen> {
 }
 
 class News {
+  final String id;
+  final String date;
+  final String title;
+  final String previewText;
+  final String previewPictureSrc;
+  final String detailPageUrl;
+  final String detailText;
 
+  News({
+    required this.id,
+    required this.date,
+    required this.title,
+    required this.previewText,
+    required this.previewPictureSrc,
+    required this.detailPageUrl,
+    required this.detailText,
+  });
+
+  factory News.fromJson(Map<String, dynamic> json) {
+    return News(
+      id: json['source']['id'] ?? 'Нет ID',
+      date: json['publishedAt'] ?? 'Нет даты',
+      title: json['title'] ?? 'Нет заголовка',
+      previewText: json['description'] ?? 'Нет содержимого',
+      previewPictureSrc: json['urlToImage'] ?? '',
+      detailPageUrl: json['url'] ?? '',
+      detailText: json['content'] ?? '',
+    );
+  }
 }
